@@ -1,5 +1,5 @@
-const CACHE = 'my-income-v4';
-const ASSETS = ['./','./index.html','./styles.css','./app.js','./manifest.json'];
+const CACHE = 'my-income-v5';
+const ASSETS = ['./','./index.html','./styles.css?v=5','./app.js?v=5','./manifest.json'];
 
 self.addEventListener('install', event => {
   event.waitUntil(
