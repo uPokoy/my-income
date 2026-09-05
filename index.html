@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#111827">
+  <meta name="description" content="Простое приложение для учёта личных доходов">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+  <title>Мои доходы</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Личные финансы</p>
+        <h1>Мои доходы</h1>
+      </div>
+      <button class="icon-btn" id="settingsBtn" aria-label="Настройки">⚙</button>
+    </header>
+
+    <main>
+      <section class="summary-card">
+        <div class="summary-head">
+          <div>
+            <span class="muted">Доход за месяц</span>
+            <strong id="monthTotal">0,00 €</strong>
+          </div>
+          <label class="month-picker">
+            <span class="sr-only">Месяц</span>
+            <input id="monthPicker" type="month">
+          </label>
+        </div>
+        <div class="stats-row">
+          <div><span>За год</span><b id="yearTotal">0,00 €</b></div>
+          <div><span>Записей</span><b id="entryCount">0</b></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">
+          <div><h2>Доходы</h2><p id="periodLabel"></p></div>
+          <button class="primary-btn" id="addBtn">+ Добавить</button>
+        </div>
+        <div id="incomeList" class="income-list"></div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title"><div><h2>По источникам</h2><p>Распределение за выбранный месяц</p></div></div>
+        <div id="sourceSummary" class="source-summary"></div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Навигация">
+      <button class="nav-btn active" data-view="summary">Сводка</button>
+      <button class="nav-btn" data-view="history">История</button>
+      <button class="nav-btn" data-view="settings">Настройки</button>
+    </nav>
+  </div>
+
+  <dialog id="incomeDialog">
+    <form method="dialog" id="incomeForm" class="dialog-card">
+      <div class="dialog-head"><div><h2 id="dialogTitle">Новый доход</h2><p>Заполните данные операции</p></div><button type="button" class="close-btn" id="closeDialog">×</button></div>
+      <input type="hidden" id="editId">
+      <label>Дата<input id="dateInput" type="date" required></label>
+      <label>Источник<select id="sourceInput" required><option>Зарплата</option><option>Фриланс</option><option>Продажи</option><option>Инвестиции</option><option>Подарок</option><option>Другое</option></select></label>
+      <label>Описание<select id="descriptionInput" required><option>Зарплата</option><option>Аванс</option><option>Премия</option><option>Отпускные</option><option>Бонус</option><option>Фриланс</option><option>Подработка</option><option>Продажа товара</option><option>Продажа услуги</option><option>Аренда</option><option>Дивиденды</option><option>Проценты</option><option>Кэшбэк</option><option>Подарок</option><option>Возврат денег</option><option>Другое</option></select></label>
+      <label id="customDescriptionWrap" class="hidden">Свое описание<input id="customDescription" type="text" maxlength="80" placeholder="Например: возврат за покупку"></label>
+      <label>Сумма<input id="amountInput" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="0,00" required></label>
+      <div class="dialog-actions"><button type="button" class="secondary-btn" id="cancelBtn">Отмена</button><button class="primary-btn" value="default">Сохранить</button></div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
