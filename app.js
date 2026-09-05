@@ -11,12 +11,14 @@ let activeMonth = new Date().getMonth();
 const money = n => new Intl.NumberFormat('ru-RU',{minimumFractionDigits:2,maximumFractionDigits:2}).format(n) + ' ₽';
 const dateRu = value => { const p = String(value).split('-'); return p.length===3 ? `${p[2]}.${p[1]}.${p[0]}` : value; };
 const save = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-const esc = s => String(s ?? '').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+const esc = s => String(s ?? '').replace(/[&<>'\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','\"':'&quot;'}[c]));
 
 function setTheme(theme){
   theme = theme === 'dark' ? 'dark' : 'light';
   document.documentElement.dataset.theme = theme;
-  localStorage.setItem(THEME_KEY, theme);
+  document.body.classList.toggle('dark-theme', theme === 'dark');
+  document.body.classList.toggle('light-theme', theme === 'light');
+  try { localStorage.setItem(THEME_KEY, theme); } catch(e) {}
   document.querySelectorAll('.theme-option').forEach(b=>b.classList.toggle('selected',b.dataset.themeChoice===theme));
 }
 function openView(){setTheme(localStorage.getItem(THEME_KEY)||'light');document.querySelector('#view-modal').classList.add('show');}
