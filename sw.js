@@ -1,4 +1,4 @@
-const CACHE = 'my-income-v3';
+const CACHE = 'my-income-v4';
 const ASSETS = ['./','./index.html','./styles.css','./app.js','./manifest.json'];
 
 self.addEventListener('install', event => {
